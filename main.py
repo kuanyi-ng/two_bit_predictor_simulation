@@ -94,6 +94,7 @@ class TwoBitPredictorByPredictionResult(TwoBitPredictor):
 
 
 def get_branch_history(history_size: int = 10) -> List[BranchResult]:
+    # NOTE: Change here to change the branch history used in simulation
     return[ BranchResult.JUMP if randint(0, 1) == 1 else BranchResult.NO_JUMP for _ in range(history_size) ]
 
 def simulate(history: List[BranchResult], predictor: TwoBitPredictor, verbose: bool = False) -> float:
@@ -121,12 +122,17 @@ if __name__ == "__main__":
     predictor_with_branch_result = TwoBitPredictorByBranchResult()
     predictor_with_prediction_result = TwoBitPredictorByPredictionResult()
 
-    branch_history = get_branch_history(history_size=1000)
+    branch_history = get_branch_history(history_size=5)
+
+    # NOTE: Change here to show/not show state transition
+    # True: show
+    # False: not show
+    SHOW_STATE_TRANSITION = False
 
     print('Predictor with Branch Result')
-    hit_rate_1 = simulate(branch_history, predictor_with_branch_result)
+    hit_rate_1 = simulate(branch_history, predictor_with_branch_result, verbose=SHOW_STATE_TRANSITION)
     print(f'Hit Rate: {hit_rate_1}')
 
     print('Predictor with Prediction Result')
-    hit_rate_2 = simulate(branch_history, predictor_with_prediction_result)
+    hit_rate_2 = simulate(branch_history, predictor_with_prediction_result, verbose=SHOW_STATE_TRANSITION)
     print(f'Hit Rate: {hit_rate_2}')
