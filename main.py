@@ -127,7 +127,10 @@ if __name__ == "__main__":
     # NOTE: Change here to show/not show state transition
     # True: show
     # False: not show
-    SHOW_STATE_TRANSITION = False
+    SHOW_STATE_TRANSITION = True
+
+    print('Branch History')
+    print(branch_history)
 
     print('Predictor with Branch Result')
     hit_rate_1 = simulate(branch_history, predictor_with_branch_result, verbose=SHOW_STATE_TRANSITION)

@@ -51,6 +51,8 @@ SHOW_STATE_TRANSITION = False
 ```
 Output:
 ```sh
+Branch History
+[<BranchResult.JUMP: True>, <BranchResult.JUMP: True>, <BranchResult.JUMP: True>, <BranchResult.NO_JUMP: False>, <BranchResult.JUMP: True>]
 Predictor with Branch Result
 Hit Rate: 0.6
 Predictor with Prediction Result
@@ -65,20 +67,22 @@ SHOW_STATE_TRANSITION = True
 ```
 Output:
 ```sh
+Branch History
+[<BranchResult.NO_JUMP: False>, <BranchResult.JUMP: True>, <BranchResult.JUMP: True>, <BranchResult.JUMP: True>, <BranchResult.NO_JUMP: False>]
 Predictor with Branch Result
+jumped: BranchResult.NO_JUMP, prediction: BranchResult.NO_JUMP, next_state: TwoBitPredictorState.STRONG_NOT_TAKE
+jumped: BranchResult.JUMP, prediction: BranchResult.NO_JUMP, next_state: TwoBitPredictorState.WEAK_NOT_TAKE
 jumped: BranchResult.JUMP, prediction: BranchResult.NO_JUMP, next_state: TwoBitPredictorState.WEAK_TAKE
 jumped: BranchResult.JUMP, prediction: BranchResult.JUMP, next_state: TwoBitPredictorState.STRONG_TAKE
 jumped: BranchResult.NO_JUMP, prediction: BranchResult.JUMP, next_state: TwoBitPredictorState.WEAK_TAKE
-jumped: BranchResult.NO_JUMP, prediction: BranchResult.JUMP, next_state: TwoBitPredictorState.WEAK_NOT_TAKE
-jumped: BranchResult.JUMP, prediction: BranchResult.NO_JUMP, next_state: TwoBitPredictorState.WEAK_TAKE
-Hit Rate: 0.2
+Hit Rate: 0.4
 Predictor with Prediction Result
+jumped: BranchResult.NO_JUMP, prediction: BranchResult.NO_JUMP, next_state: TwoBitPredictorState.STRONG_NOT_TAKE
+jumped: BranchResult.JUMP, prediction: BranchResult.NO_JUMP, next_state: TwoBitPredictorState.WEAK_NOT_TAKE
 jumped: BranchResult.JUMP, prediction: BranchResult.NO_JUMP, next_state: TwoBitPredictorState.WEAK_TAKE
 jumped: BranchResult.JUMP, prediction: BranchResult.JUMP, next_state: TwoBitPredictorState.STRONG_TAKE
 jumped: BranchResult.NO_JUMP, prediction: BranchResult.JUMP, next_state: TwoBitPredictorState.WEAK_TAKE
-jumped: BranchResult.NO_JUMP, prediction: BranchResult.JUMP, next_state: TwoBitPredictorState.WEAK_NOT_TAKE
-jumped: BranchResult.JUMP, prediction: BranchResult.NO_JUMP, next_state: TwoBitPredictorState.WEAK_TAKE
-Hit Rate: 0.2
+Hit Rate: 0.4
 ```
 
 ## Inner State of 2 Bit Predictor
