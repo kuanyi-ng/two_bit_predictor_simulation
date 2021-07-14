@@ -11,6 +11,8 @@ $ python3 main.py
 ### Modify the Branch History
 Change the size of (randomly-generated) branch history
 ```py
+# main.py
+
 # branch history of size 100
 branch_history = get_branch_history(history_size=100)
 
@@ -20,6 +22,8 @@ branch_history = get_branch_history(history_size=1000)
 
 Use a custom branch history by changing what the `get_branch_history()` function returns.
 ```py
+# main.py
+
 # Before: randomly-generated
 def get_branch_history(history_size: int = 10) -> List[BranchResult]:
     return[ BranchResult.JUMP if randint(0, 1) == 1 else BranchResult.NO_JUMP for _ in range(history_size) ]
@@ -39,16 +43,48 @@ def get_branch_history() -> List[BranchResult]:
 ```
 
 ### Output State Transition
+Don't print State Transition
 ```py
-# Don't print State Transition
-simulate(branch_history, predictor)
+# main.py
 
-# print State Transition
-simulate(branch_history, predictor, verbose=True)
+SHOW_STATE_TRANSITION = False
+```
+Output:
+```sh
+Predictor with Branch Result
+Hit Rate: 0.6
+Predictor with Prediction Result
+Hit Rate: 0.6
+```
+
+Print State Transition
+```py
+# main.py
+
+SHOW_STATE_TRANSITION = True
+```
+Output:
+```sh
+Predictor with Branch Result
+jumped: BranchResult.JUMP, prediction: BranchResult.NO_JUMP, next_state: TwoBitPredictorState.WEAK_TAKE
+jumped: BranchResult.JUMP, prediction: BranchResult.JUMP, next_state: TwoBitPredictorState.STRONG_TAKE
+jumped: BranchResult.NO_JUMP, prediction: BranchResult.JUMP, next_state: TwoBitPredictorState.WEAK_TAKE
+jumped: BranchResult.NO_JUMP, prediction: BranchResult.JUMP, next_state: TwoBitPredictorState.WEAK_NOT_TAKE
+jumped: BranchResult.JUMP, prediction: BranchResult.NO_JUMP, next_state: TwoBitPredictorState.WEAK_TAKE
+Hit Rate: 0.2
+Predictor with Prediction Result
+jumped: BranchResult.JUMP, prediction: BranchResult.NO_JUMP, next_state: TwoBitPredictorState.WEAK_TAKE
+jumped: BranchResult.JUMP, prediction: BranchResult.JUMP, next_state: TwoBitPredictorState.STRONG_TAKE
+jumped: BranchResult.NO_JUMP, prediction: BranchResult.JUMP, next_state: TwoBitPredictorState.WEAK_TAKE
+jumped: BranchResult.NO_JUMP, prediction: BranchResult.JUMP, next_state: TwoBitPredictorState.WEAK_NOT_TAKE
+jumped: BranchResult.JUMP, prediction: BranchResult.NO_JUMP, next_state: TwoBitPredictorState.WEAK_TAKE
+Hit Rate: 0.2
 ```
 
 ## Inner State of 2 Bit Predictor
 ```py
+# main.py
+
 class TwoBitPredictorState(Enum):
     STRONG_NOT_TAKE = 0
     WEAK_NOT_TAKE = 1
@@ -62,6 +98,8 @@ There are two predictors defined in this program.
 ### 1. TwoBitPredictorByBranchResult
 Branch Result shows whether the program counter should jump (to a different address) or not.
 ```py
+# main.py
+
 class BranchResult(Enum):
     JUMP = True
     NO_JUMP = False
@@ -75,6 +113,8 @@ class BranchResult(Enum):
 ### 2. TwoBitPredictorByPredictionResult
 Prediction Result shows whether a prediction made is correct or not.
 ```py
+# main.py
+
 class PredictionResult(Enum):
     CORRECT = True
     INCORRECT = False
