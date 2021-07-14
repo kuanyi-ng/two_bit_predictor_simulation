@@ -2,6 +2,12 @@
 This program simulates branch prediction performed by a 2-bit predictor.
 The simulation also calculates the hit rate of a 2-bit predictor with a given branch history.
 
+- [How to use](#how-to-use)
+- [Types of Predictors](#types-of-predictors)
+  - [1. TwoBitPredictorByBranchResult](#1-twobitpredictorbybranchresult)
+  - [2. TwoBitPredictorByPredictionResult](#2-twobitpredictorbypredictionresult)
+- [(No) Difference between the Two Predictors](#no-difference-between-the-two-predictors)
+
 ## How to use
 ### Run the Simulation
 ```sh
