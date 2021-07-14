@@ -97,23 +97,23 @@ For example, let's see how the inner state changes under the following condition
 - branch result: JUMP
 
 #### TwoBitPredictorByBranchResult
-**next state: WEAK_TAKE**
+- **next state: WEAK_TAKE**
 
 #### TwoBitPredictorByPredictionResult
-prediction made: NO JUMP
-branch result: JUMP
-prediction result: INCORRECT
-**next state: WEAK_TAKE**
+- prediction made: NO JUMP
+- branch result: JUMP
+- prediction result: INCORRECT
+- **next state: WEAK_TAKE**
 
 ### Case 2
 - current inner state: WEAK_NOT_TAKE
 - branch result: NO JUMP
 
 #### TwoBitPredictorByBranchResult
-**next state: STRONG_NOT_TAKE**
+- **next state: STRONG_NOT_TAKE**
 
 #### TwoBitPredictorByPredictionResult
-prediction made: NO JUMP
-branch result: NO JUMP
-prediction result: CORRECT
-**next state: STRONG_NOT_TAKE**
+- prediction made: NO JUMP
+- branch result: NO JUMP
+- prediction result: CORRECT
+- **next state: STRONG_NOT_TAKE**
