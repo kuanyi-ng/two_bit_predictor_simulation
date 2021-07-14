@@ -30,9 +30,9 @@ class TwoBitPredictor():
     def set_state(self, new_state: TwoBitPredictorState) -> None:
         self.state = new_state
 
-    def predict(self) -> bool:
+    def predict(self) -> BranchResult:
         jump = (self.state == TwoBitPredictorState.WEAK_TAKE) or (self.state == TwoBitPredictorState.STRONG_TAKE)
-        return jump
+        return BranchResult.JUMP if jump else BranchResult.NO_JUMP
 
     def update_state(self, branch_result: BranchResult, prediction_result: PredictionResult) -> None:
         pass
