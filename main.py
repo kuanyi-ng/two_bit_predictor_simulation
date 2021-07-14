@@ -92,38 +92,39 @@ class TwoBitPredictorByPredictionResult(TwoBitPredictor):
         super().set_state(next_state)
 
 
-def get_branch_history() -> List[bool]:
+def get_branch_history(history_size: int = 10) -> List[BranchResult]:
     import random
-    return[ random.randint(0, 1) == 1 for _ in range(100) ]
+    return[ BranchResult.JUMP if random.randint(0, 1) == 1 else BranchResult.NO_JUMP for _ in range(history_size) ]
 
-def simulate(history: List[bool], predictor: TwoBitPredictor) -> float:
+def simulate(history: List[BranchResult], predictor: TwoBitPredictor) -> float:
     hit_count = 0
-    for jumped in history:
+
+    for branch_result in history:
         # make prediction
         prediction = predictor.predict()
-        
-        branch_result = BranchResult.JUMP if jumped else BranchResult.NO_JUMP
-        prediction_result = PredictionResult.CORRECT if (prediction == jumped) else PredictionResult.INCORRECT
+
 
         # check prediction
-        if prediction == jumped:
-            hit_count +=1
+        is_prediction_correct = (prediction == branch_result)
+        prediction_result = PredictionResult.CORRECT if is_prediction_correct else PredictionResult.INCORRECT
+        if is_prediction_correct:
+            hit_count += 1
 
-        # update predictor state
-        predictor.update_state(branch_result=branch_result, prediction_result=prediction_result)
-
-        print(f"jumped: {jumped}, prediction: {prediction}, next_state: {predictor.state}")
+        predictor.update_state(branch_result, prediction_result)
+        print(f"jumped: {branch_result}, prediction: {prediction}, next_state: {predictor.state}")
          
     return hit_count / len(history)
 
 if __name__ == "__main__":
-    predictor_1 = TwoBitPredictorByBranchResult()
-    predictor_2 = TwoBitPredictorByPredictionResult()
+    predictor_with_branch_result = TwoBitPredictorByBranchResult()
+    predictor_with_prediction_result = TwoBitPredictorByPredictionResult()
 
     branch_history = get_branch_history()
 
-    hit_rate_1 = simulate(branch_history, predictor_1)
+    print('Predictor with Branch Result')
+    hit_rate_1 = simulate(branch_history, predictor_with_branch_result)
     print(hit_rate_1)
 
-    hit_rate_2 = simulate(branch_history, predictor_2)
+    print('Predictor with Prediction Result')
+    hit_rate_2 = simulate(branch_history, predictor_with_prediction_result)
     print(hit_rate_2)
