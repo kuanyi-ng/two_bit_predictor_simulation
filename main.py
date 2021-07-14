@@ -4,6 +4,7 @@ Simulate 2-bit Predictor and measure it's hit rate.
 """
 
 from enum import Enum
+from random import randint
 from typing import List
 
 class BranchResult(Enum):
@@ -93,8 +94,7 @@ class TwoBitPredictorByPredictionResult(TwoBitPredictor):
 
 
 def get_branch_history(history_size: int = 10) -> List[BranchResult]:
-    import random
-    return[ BranchResult.JUMP if random.randint(0, 1) == 1 else BranchResult.NO_JUMP for _ in range(history_size) ]
+    return[ BranchResult.JUMP if randint(0, 1) == 1 else BranchResult.NO_JUMP for _ in range(history_size) ]
 
 def simulate(history: List[BranchResult], predictor: TwoBitPredictor, verbose: bool = False) -> float:
     hit_count = 0
